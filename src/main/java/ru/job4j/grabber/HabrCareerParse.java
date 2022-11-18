@@ -31,4 +31,17 @@ public class HabrCareerParse {
             });
         }
     }
+
+    private static String retrieveDescription(String link) {
+        Connection connection = Jsoup.connect(link);
+        StringBuilder result = new StringBuilder();
+        try {
+            Document document = connection.get();
+            Elements rows = document.select(".style-ugc *");
+            rows.forEach(row -> result.append(row.ownText()).append('\n'));
+        } catch (IOException e) {
+            throw new RuntimeException(e);
+        }
+        return result.toString();
+    }
 }
