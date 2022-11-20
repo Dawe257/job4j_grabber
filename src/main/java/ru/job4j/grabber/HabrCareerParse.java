@@ -14,7 +14,6 @@ import java.util.ArrayList;
 import java.util.List;
 
 public class HabrCareerParse implements Parse {
-
     private static final String SOURCE_LINK = "https://career.habr.com";
     private static final int PAGES_COUNTER = 5;
     private final DateTimeParser dateTimeParser;
