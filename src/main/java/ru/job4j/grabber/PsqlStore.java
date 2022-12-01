@@ -13,7 +13,7 @@ import java.util.Properties;
 public class PsqlStore implements Store, AutoCloseable {
 
     private Connection cnn;
-    Logger logger = LoggerFactory.getLogger(PsqlStore.class.getName());
+    private static final Logger LOGGER = LoggerFactory.getLogger(PsqlStore.class.getName());
 
     public PsqlStore(Properties cfg) {
         try {
@@ -23,7 +23,7 @@ public class PsqlStore implements Store, AutoCloseable {
                     cfg.getProperty("jdbc.user"),
                     cfg.getProperty("jdbc.password"));
         } catch (Exception e) {
-            logger.error(e.getMessage(), e);
+            LOGGER.error(e.getMessage(), e);
         }
     }
 
@@ -42,7 +42,7 @@ public class PsqlStore implements Store, AutoCloseable {
                 post.setId(generatedKeys.getInt(1));
             }
         } catch (SQLException e) {
-            logger.error(e.getMessage(), e);
+            LOGGER.error(e.getMessage(), e);
         }
     }
 
@@ -56,7 +56,7 @@ public class PsqlStore implements Store, AutoCloseable {
                 result.add(getPostFromResultSet(resultSet));
             }
         } catch (SQLException e) {
-            logger.error(e.getMessage(), e);
+            LOGGER.error(e.getMessage(), e);
         }
         return result;
     }
@@ -72,7 +72,7 @@ public class PsqlStore implements Store, AutoCloseable {
                 result = getPostFromResultSet(resultSet);
             }
         } catch (SQLException e) {
-            logger.error(e.getMessage(), e);
+            LOGGER.error(e.getMessage(), e);
         }
         return result;
     }

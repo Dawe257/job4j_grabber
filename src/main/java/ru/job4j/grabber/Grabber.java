@@ -14,8 +14,9 @@ import static org.quartz.SimpleScheduleBuilder.simpleSchedule;
 import static org.quartz.TriggerBuilder.newTrigger;
 
 public class Grabber implements Grab {
-    private final Properties cfg = new Properties();
+
     private final static String HABR_SOURCE = "https://career.habr.com/vacancies/java_developer?page=";
+    private final Properties cfg = new Properties();
 
     public Store store() {
         return new PsqlStore(cfg);
@@ -60,7 +61,6 @@ public class Grabber implements Grab {
             Parse parse = (Parse) map.get("parse");
             List<Post> list = parse.list(HABR_SOURCE);
             list.forEach(store::save);
-            /* TODO impl logic */
         }
     }
 
